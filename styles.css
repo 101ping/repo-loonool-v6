@@ -39,20 +39,26 @@ body {
     }
 }
 
-/* 褶皱动态效果 */
+/* 白色素描纸背景与褶皱效果 */
 body {
-    animation: crumple 20s infinite alternate; /* 动画让背景和褶皱效果流动 */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;  /* 白色背景 */
+    color: #333;
+    background-image: url('https://www.transparenttextures.com/patterns/diagonal-stripes-light.png'); /* 纸张纹理 */
+    background-repeat: repeat;  /* 重复纹理 */
+    background-size: 100% 100%;  /* 背景尺寸 */
+    background-attachment: fixed; /* 固定背景 */
 }
+
+/* 其他样式 */
 header {
-    display: flex;
-    justify-content: space-between;
     padding: 20px 50px;
-    background: #007BFF;
+    background-color: #007BFF;
     color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+}
+
 }
 
 header .logo img {
