@@ -6,11 +6,13 @@ body {
     background-color: #f5f5f5;  /* 基本背景颜色 */
     color: #333;
     
-    /* 使用上传的纹理图片作为背景 */
-    background-image: url('assets/texture.png');  /* '../assets/image.png' */
-    background-repeat: repeat;  /* 使图片平铺 */
-    background-size: 100% 100%;  /* 让图片填充背景区域 */
-    background-attachment: fixed;  /* 固定背景 */
+   body {
+    background-image: url('assets/image.png');  /* 引用图片路径 */
+    background-repeat: repeat;  /* 平铺背景 */
+    background-size: cover;  /* 使背景填充整个屏幕 */
+    background-attachment: fixed; /* 固定背景 */
+}
+
 }
 
 }
