@@ -31,42 +31,11 @@ body {
     outline: none;
 }
 
-/* 鼠标悬停时的喷发效果 */
-.create-space-btn:hover {
-    box-shadow: 0 0 20px 5px rgba(0, 123, 255, 0.8), 0 0 50px 15px rgba(0, 123, 255, 1);  /* 强烈的蓝色光效 */
-    transform: scale(1.1);  /* 放大效果 */
-    animation: explode 0.5s forwards;  /* 添加动画 */
+
+
+    
 }
 
-/* 喷发动画效果 */
-@keyframes explode {
-    0% {
-        transform: scale(1);  /* 初始大小 */
-        box-shadow: 0 0 20px 5px rgba(0, 123, 255, 0.8), 0 0 50px 15px rgba(0, 123, 255, 1); /* 明亮的光效 */
-    }
-    50% {
-        transform: scale(1.2);  /* 放大 */
-        box-shadow: 0 0 30px 10px rgba(0, 123, 255, 1), 0 0 100px 20px rgba(0, 123, 255, 1);  /* 光效扩展 */
-    }
-    100% {
-        transform: scale(1);  /* 恢复原状 */
-        box-shadow: 0 0 10px 3px rgba(0, 123, 255, 0.6);  /* 恢复正常的光效 */
-    }
-}
-/* 设置背景为颗粒纹理 */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;  /* 基本背景颜色 */
-    color: #333;
-    
- body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000000;  /* 设置黑色背景 */
-    color: #fff;  /* 设置文字为白色，便于在黑色背景上显示 */
 }
 
 }
