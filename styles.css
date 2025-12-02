@@ -1,6 +1,6 @@
 /* 通用样式 */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background: #f5f5f5;
@@ -11,8 +11,12 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 20px 50px;
-    background: #fff;
+    background: #007BFF;
+    color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 header .logo img {
@@ -22,17 +26,19 @@ header .logo img {
 header nav a {
     text-decoration: none;
     margin-left: 20px;
-    color: #007BFF;
+    color: white;
     font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
 header nav a:hover {
-    text-decoration: underline;
+    color: #ffcc00; /* Hover 色彩变化 */
 }
 
 .hero {
     background: linear-gradient(to right, #4A90E2, #fff);
-    color: #fff;
+    color: white;
     text-align: center;
     padding: 100px 20px;
 }
@@ -40,11 +46,14 @@ header nav a:hover {
 .hero h1 {
     font-size: 36px;
     margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .hero p {
     font-size: 18px;
     margin-bottom: 30px;
+    font-weight: 400;
 }
 
 #create-space-btn {
@@ -55,10 +64,12 @@ header nav a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: transform 0.3s ease, background-color 0.3s;
 }
 
 #create-space-btn:hover {
     background: #005BB5;
+    transform: scale(1.05); /* 按钮微交互 */
 }
 
 .features {
@@ -70,6 +81,8 @@ header nav a:hover {
 .features h2 {
     font-size: 28px;
     margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
 }
 
 .features ul {
@@ -80,11 +93,12 @@ header nav a:hover {
 .features li {
     font-size: 18px;
     margin: 10px 0;
+    color: #333;
 }
 
 footer {
     background: #333;
-    color: #fff;
+    color: white;
     text-align: center;
     padding: 20px;
 }
@@ -100,10 +114,35 @@ footer ul li {
 }
 
 footer ul li a {
-    color: #fff;
+    color: white;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 footer ul li a:hover {
-    text-decoration: underline;
+    color: #ffcc00; /* Hover 色彩变化 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    .hero {
+        padding: 80px 20px;
+    }
+
+    .features ul {
+        padding: 0;
+    }
+
+    .features li {
+        font-size: 16px;
+    }
 }
