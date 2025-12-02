@@ -1,3 +1,58 @@
+/* 页面样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000;  /* 背景黑色 */
+    color: #fff;  /* 字体颜色为白色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 按钮容器 */
+.button-container {
+    text-align: center;
+}
+
+/* 创建图片审核空间按钮 */
+.create-space-btn {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px 40px;
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    outline: none;
+}
+
+/* 鼠标悬停时的喷发效果 */
+.create-space-btn:hover {
+    box-shadow: 0 0 20px 5px rgba(0, 123, 255, 0.8), 0 0 50px 15px rgba(0, 123, 255, 1);  /* 强烈的蓝色光效 */
+    transform: scale(1.1);  /* 放大效果 */
+    animation: explode 0.5s forwards;  /* 添加动画 */
+}
+
+/* 喷发动画效果 */
+@keyframes explode {
+    0% {
+        transform: scale(1);  /* 初始大小 */
+        box-shadow: 0 0 20px 5px rgba(0, 123, 255, 0.8), 0 0 50px 15px rgba(0, 123, 255, 1); /* 明亮的光效 */
+    }
+    50% {
+        transform: scale(1.2);  /* 放大 */
+        box-shadow: 0 0 30px 10px rgba(0, 123, 255, 1), 0 0 100px 20px rgba(0, 123, 255, 1);  /* 光效扩展 */
+    }
+    100% {
+        transform: scale(1);  /* 恢复原状 */
+        box-shadow: 0 0 10px 3px rgba(0, 123, 255, 0.6);  /* 恢复正常的光效 */
+    }
+}
 /* 设置背景为颗粒纹理 */
 body {
     font-family: 'Arial', sans-serif;
