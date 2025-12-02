@@ -1,227 +1,137 @@
-/* 页面样式 */
-body {
-    font-family: 'Arial', sans-serif;
+/* 基础全局样式 */
+* {
     margin: 0;
     padding: 0;
-    background-color: #000;  /* 背景黑色 */
-    color: #fff;  /* 字体颜色为白色 */
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* 顶部导航栏 */
+.navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
 }
 
-/* 按钮容器 */
-.button-container {
-    text-align: center;
-}
-
-/* 创建图片审核空间按钮 */
-.create-space-btn {
-    font-size: 20px;
+.navbar .logo-text {
+    font-size: 24px;
     font-weight: bold;
-    padding: 15px 40px;
-    border: 2px solid #007BFF;
-    border-radius: 10px;
-    background-color: #007BFF;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    outline: none;
-}
-
-
-
-    
-}
-
-}
-
-}
-
-}
-
-}
-
-/* 创建褶皱的视觉效果 */
-body:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('https://www.transparenttextures.com/patterns/diagonal-stripes-light.png'); /* 纸张纹理图 */
-    background-size: cover;
-    opacity: 0.1;  /* 使纹理图透明度降低 */
-    pointer-events: none;  /* 使纹理图不影响点击事件 */
-}
-
-/* 增加纸张褶皱阴影效果 */
-body {
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);  /* 纸张阴影 */
-}
-
-/* 添加动态褶皱效果：动画 */
-@keyframes crumple {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100px 100px;
-    }
-}
-
-/* 白色素描纸背景与褶皱效果 */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;  /* 白色背景 */
     color: #333;
-    background-image: url('https://www.transparenttextures.com/patterns/diagonal-stripes-light.png'); /* 纸张纹理 */
-    background-repeat: repeat;  /* 重复纹理 */
-    background-size: 100% 100%;  /* 背景尺寸 */
-    background-attachment: fixed; /* 固定背景 */
 }
 
-/* 其他样式 */
-header {
-    padding: 20px 50px;
+.navbar .nav-link {
+    text-decoration: none;
+    color: #333;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.navbar .nav-link:hover {
+    color: #007BFF;
+}
+
+.navbar .btn-outline {
+    background: none;
+    border: 2px solid #007BFF;
+    padding: 8px 20px;
+    border-radius: 25px;
+    color: #007BFF;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.navbar .btn-outline:hover {
     background-color: #007BFF;
     color: white;
 }
 
-}
-
-header .logo img {
-    width: 120px;
-}
-
-header nav a {
-    text-decoration: none;
-    margin-left: 20px;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-header nav a:hover {
-    color: #ffcc00; /* Hover 色彩变化 */
-}
-
+/* 主视觉区域 */
 .hero {
-    background: linear-gradient(to right, #4A90E2, #fff);
-    color: white;
     text-align: center;
-    padding: 100px 20px;
+    padding: 100px 40px;
+    background-color: #f8f9fa;
 }
 
 .hero h1 {
     font-size: 36px;
-    margin-bottom: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: bold;
+    color: #333;
 }
 
 .hero p {
     font-size: 18px;
-    margin-bottom: 30px;
-    font-weight: 400;
+    color: #555;
+    margin-top: 10px;
 }
 
-/* 创建图片审核空间按钮 */
-#create-space-btn {
-    background: #007BFF;
+.hero .btn-primary {
+    background-color: #007BFF;
     color: white;
     padding: 15px 30px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.3s ease; /* 增加 box-shadow 过渡 */
-}
-
-/* 鼠标悬停时发光效果 */
-#create-space-btn:hover {
-    background: #005BB5;
-    transform: scale(1.05); /* 按钮微交互 */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.7); /* 发光效果 */
-}
-
-.features {
-    background: #fff;
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.features h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: #333;
-}
-
-.features ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.features li {
+    border-radius: 25px;
     font-size: 18px;
-    margin: 10px 0;
-    color: #333;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
-footer {
-    background: #333;
-    color: white;
+.hero .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* 功能简介区域 */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+.feature-item {
     text-align: center;
     padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-footer ul {
-    list-style-type: none;
-    padding: 0;
+.feature-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-footer ul li {
-    display: inline-block;
-    margin: 0 15px;
+.feature-item h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 20px;
 }
 
-footer ul li a {
-    color: white;
+.feature-item p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* 底部页脚 */
+.footer {
+    background-color: #f1f1f1;
+    padding: 40px;
+    text-align: center;
+}
+
+.footer a {
     text-decoration: none;
-    transition: color 0.3s;
+    color: #007BFF;
+    margin: 0 15px;
+    font-size: 16px;
 }
 
-footer ul li a:hover {
-    color: #ffcc00; /* Hover 色彩变化 */
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    nav {
-        margin-top: 10px;
-    }
-
-    .hero {
-        padding: 80px 20px;
-    }
-
-    .features ul {
-        padding: 0;
-    }
-
-    .features li {
-        font-size: 16px;
-    }
+.footer a:hover {
+    color: #0056b3;
 }
