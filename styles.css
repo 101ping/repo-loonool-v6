@@ -1,13 +1,18 @@
-/* 通用样式 */
-/* 白色素描纸背景与褶皱效果 */
+/* 设置背景为颗粒纹理 */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f0f0f0, #ffffff);  /* 白色渐变，模拟纸张色 */
+    background-color: #f5f5f5;  /* 基本背景颜色 */
     color: #333;
-    background-size: 100% 100%; /* 背景尺寸 */
-    background-attachment: fixed; /* 固定背景 */
+    
+    /* 使用上传的纹理图片作为背景 */
+    background-image: url('assets/texture.png');  /* '../assets/image.png' */
+    background-repeat: repeat;  /* 使图片平铺 */
+    background-size: 100% 100%;  /* 让图片填充背景区域 */
+    background-attachment: fixed;  /* 固定背景 */
+}
+
 }
 
 /* 创建褶皱的视觉效果 */
