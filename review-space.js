@@ -8,7 +8,6 @@ function getSpaceIdFromUrl() {
 
 /***********************
  * 2. 每个 Space 的配置（假数据）
- *    以后这里可以换成后端接口返回
  ***********************/
 const SPACE_CONFIGS = {
   "space-001": {
@@ -126,7 +125,7 @@ const SPACE_CONFIGS = {
 
   "space-003": {
     spaceName: "社交媒体活动视觉素材审核",
-    tasks: [], // 故意留空：演示首进来时为空状态
+    tasks: [], // 故意留空：演示空空间
     discussion: [
       {
         id: "m1",
@@ -138,23 +137,21 @@ const SPACE_CONFIGS = {
 };
 
 /***********************
- * 3. 当前 Space 运行时状态
+ * 3. 当前 Space 运行状态
  ***********************/
 const currentSpaceId = getSpaceIdFromUrl() || "space-001";
 const currentSpaceConfig =
   SPACE_CONFIGS[currentSpaceId] || SPACE_CONFIGS["space-001"];
 
-// 这里把配置里的数据“拷一份”到运行时变量里，后面会改它
 let tasks = JSON.parse(JSON.stringify(currentSpaceConfig.tasks || []));
 let discussionMessages = JSON.parse(
   JSON.stringify(currentSpaceConfig.discussion || [])
 );
 
-// 当前选中的任务 id（如果有任务就默认第一个）
 let currentTaskId = tasks[0]?.id || null;
 
 /***********************
- * 4. 工具函数：取当前任务
+ * 4. 工具函数
  ***********************/
 function getCurrentTask() {
   if (!currentTaskId) return null;
@@ -181,7 +178,6 @@ function renderTaskList() {
       const finalHtml = task.hasFinal
         ? '<span class="task-final-icon">✅</span>'
         : '<span class="task-final-placeholder">Final</span>';
-
       const label = task.name || `任务 ${index + 1}`;
 
       return `
@@ -277,7 +273,7 @@ function renderDiscussion() {
 }
 
 /***********************
- * 8. 右侧：Evidence Summary + List
+ * 8. 右侧：Evidence Summary
  ***********************/
 function renderEvidenceSummary() {
   const task = getCurrentTask();
@@ -342,6 +338,9 @@ function renderEvidenceSummary() {
   `;
 }
 
+/***********************
+ * 9. 右侧：Evidence List（带预览按钮）
+ ***********************/
 function renderEvidenceList() {
   const task = getCurrentTask();
   const listEl = document.getElementById("evidenceList");
@@ -352,6 +351,8 @@ function renderEvidenceList() {
       '<div class="sidebar-hint">当前任务还没有任何 Evidence，可以从下方工具或上传入口创建。</div>';
     return;
   }
+
+  const spaceId = currentSpaceId;
 
   listEl.innerHTML = task.evidences
     .map(
@@ -368,8 +369,22 @@ function renderEvidenceList() {
           ${ev.summary}
         </div>
         <div class="evidence-actions">
-          <button class="btn-secondary btn-small">查看详情</button>
-          <button class="btn-secondary btn-small">复制预览链接</button>
+          <button
+            class="btn-secondary btn-small evidence-preview-btn"
+            data-space-id="${spaceId}"
+            data-task-id="${task.id}"
+            data-evidence-id="${ev.id}"
+          >
+            查看详情
+          </button>
+          <button
+            class="btn-secondary btn-small evidence-copy-btn"
+            data-space-id="${spaceId}"
+            data-task-id="${task.id}"
+            data-evidence-id="${ev.id}"
+          >
+            复制预览链接
+          </button>
         </div>
       </div>
     `
@@ -378,7 +393,7 @@ function renderEvidenceList() {
 }
 
 /***********************
- * 9. 图片预览 Modal（假图）
+ * 10. 图片预览 Modal
  ***********************/
 function openImageModal(img) {
   const modal = document.getElementById("imageModal");
@@ -405,10 +420,10 @@ function closeImageModal() {
 }
 
 /***********************
- * 10. 事件绑定
+ * 11. 事件绑定
  ***********************/
 function bindEvents() {
-  // 左侧：Add Images
+  // 左侧：上传图片
   const addBtn = document.getElementById("addImagesBtn");
   if (addBtn) {
     addBtn.addEventListener("click", () => {
@@ -416,7 +431,7 @@ function bindEvents() {
     });
   }
 
-  // 左侧：Export Results
+  // 左侧：导出结果
   const exportBtn = document.getElementById("exportBtn");
   if (exportBtn) {
     exportBtn.addEventListener("click", () => {
@@ -442,7 +457,7 @@ function bindEvents() {
     });
   }
 
-  // 中间：点击图片 → 弹出 Modal
+  // 中间：点击图片 → 弹 Modal
   const imageGrid = document.getElementById("imageGrid");
   if (imageGrid) {
     imageGrid.addEventListener("click", (e) => {
@@ -506,20 +521,61 @@ function bindEvents() {
   // 分析工具点击
   document.addEventListener("click", (e) => {
     const row = e.target.closest(".tool-row");
-    if (!row) return;
-    const nameEl = row.querySelector(".tool-name");
-    const label = nameEl ? nameEl.textContent.trim() : "分析工具";
-    alert(
-      `这里将来接：执行分析工具「${label}」，针对当前 Task 图片生成结果，并可保存为 Evidence。`
-    );
+    if (row) {
+      const nameEl = row.querySelector(".tool-name");
+      const label = nameEl ? nameEl.textContent.trim() : "分析工具";
+      alert(
+        `这里将来接：执行分析工具「${label}」，针对当前 Task 图片生成结果，并可保存为 Evidence。`
+      );
+      return;
+    }
+
+    // Evidence 预览按钮
+    const previewBtn = e.target.closest(".evidence-preview-btn");
+    if (previewBtn) {
+      const spaceId = previewBtn.getAttribute("data-space-id");
+      const taskId = previewBtn.getAttribute("data-task-id");
+      const evId = previewBtn.getAttribute("data-evidence-id");
+      const url = `evidence-preview.html?spaceId=${spaceId}&taskId=${taskId}&evidenceId=${evId}`;
+      window.location.href = url;
+      return;
+    }
+
+    // Evidence 复制链接按钮
+    const copyBtn = e.target.closest(".evidence-copy-btn");
+    if (copyBtn) {
+      const spaceId = copyBtn.getAttribute("data-space-id");
+      const taskId = copyBtn.getAttribute("data-task-id");
+      const evId = copyBtn.getAttribute("data-evidence-id");
+
+      // 生成预览链接（本地 file:// 环境下会有点丑，但部署到服务器就正常了）
+      const base =
+        window.location.origin === "null" || window.location.origin === ""
+          ? ""
+          : window.location.origin;
+      const path = window.location.pathname.replace(/[^/]*$/, "");
+      const url = `${base}${path}evidence-preview.html?spaceId=${spaceId}&taskId=${taskId}&evidenceId=${evId}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(url)
+          .then(() =>
+            alert("预览链接已复制，可以分享给需要查看的人。")
+          )
+          .catch(() =>
+            alert("复制失败，可以在打开预览页后从地址栏手动复制链接。")
+          );
+      } else {
+        alert("当前环境不支持一键复制，可在打开预览页后从地址栏手动复制链接。");
+      }
+    }
   });
 }
 
 /***********************
- * 11. 初始化
+ * 12. 初始化
  ***********************/
 window.addEventListener("DOMContentLoaded", () => {
-  // 顺便把浏览器 tab 标题改成带 Space 名称的
   if (currentSpaceConfig.spaceName) {
     document.title =
       currentSpaceConfig.spaceName + " · 审核空间 · LOONOOL 图片审核空间";
