@@ -2,18 +2,74 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <title>LOONOOL · 首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOONOOL · 图片审核空间</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <h1>首页</h1>
-    <p>这里是 LOONOOL 首页。</p>
+    <!-- ========== 顶部导航栏 ========== -->
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="logo"></div>
+        <span class="brand-text">LOONOOL · 图片审核空间</span>
+      </div>
 
-    <!-- 关键：这个按钮必须有 id="createSpaceBtn" -->
-    <button id="createSpaceBtn">
-      创建图片审核空间（Create Review Space）
-    </button>
+      <nav class="nav-right">
+        <a href="#" class="nav-link">Login</a>
+        <a href="#" class="nav-link">Sign Up</a>
+        <a href="#" class="nav-link">Help</a>
+      </nav>
+    </header>
 
-    <!-- 把 app.js 放在 body 最下面 -->
+    <!-- ========== 主视觉区域 ========== -->
+    <section class="hero">
+      <h1 class="hero-title">用 LOONOOL 审核你的图片，做出可放心使用的视觉决策。</h1>
+      <p class="hero-subtitle">
+        上传图片 · 团队一起看 · AI 提供证据 · 一张图被确认可用
+      </p>
+
+      <button id="createSpaceBtn" class="btn-primary">
+        创建图片审核空间（Create Review Space）
+      </button>
+    </section>
+
+    <!-- ========== 功能简介区域 ========== -->
+    <section class="features">
+      <div class="feature-card">
+        <h3>多图对比</h3>
+        <p>快速对比同一主题的多张图，理解差异与风险点。</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>团队讨论</h3>
+        <p>邀请团队成员发表评论，让审核过程更透明。</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>审核证据链（Evidence）</h3>
+        <p>记录每一张图片的所有依据与来源，便于追溯。</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>AI 分析工具（Analysis Tools）</h3>
+        <p>AI 自动生成相似度、风险点、参考证据等分析。</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>导出结果（Export）</h3>
+        <p>一键导出审核结果，让团队快速使用。</p>
+      </div>
+    </section>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="footer">
+      <a href="#">帮助中心</a>
+      <a href="#">隐私政策</a>
+      <a href="#">服务条款</a>
+      <a href="#">联系我们</a>
+    </footer>
+
     <script src="app.js"></script>
   </body>
 </html>
