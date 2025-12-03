@@ -14,7 +14,51 @@
     padding: 20px 40px;
     background-color: #ffffff;
     border-bottom: 1px solid #ddd;
+}/* 整个导航条 */
+.navbar {
+  background-color: #0084ff;
+  padding: 10px 40px;
+  color: #fff;
 }
+
+/* 内部左右布局 */
+.navbar-inner {
+  display: flex;
+  align-items: center;
+}
+
+/* 左侧 logo 区域 */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 28px;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-size: 14px;
+}
+
+/* 右侧链接：关键是 margin-left: auto 把它推到最右 */
+.nav-right {
+  margin-left: auto;          /* 把右侧容器顶到最右 */
+  display: flex;
+  gap: 24px;                  /* 链接之间的间距 */
+}
+
+.nav-link {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
 
 .navbar .logo-text {
     font-size: 24px;
