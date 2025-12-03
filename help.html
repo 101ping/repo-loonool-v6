@@ -162,4 +162,78 @@
             <div class="faq-answer">
               <p>
                 分析工具（Analysis Tools）是 LOONOOL 提供的 AI
-                能力入口，用来给当前任务里的图片生成机器分析结果。按照类型大致
+                能力入口，用来给当前任务里的图片生成机器分析结果。按照类型大致分为：
+              </p>
+              <ul>
+                <li>风险工具（Risk Tools）：例如图形相似度初筛、潜在侵权风险提示等；</li>
+                <li>风格工具（Style Tools）：例如视觉风格对比、品牌统一性检查等；</li>
+                <li>市场工具（Market Tools）：例如同类产品视觉扫描等。</li>
+              </ul>
+              <p>
+                使用工具后，会弹出结果视图，你可以选择「保存为证据」，
+                将结果固化到 Evidence 列表中，形成决策依据的一部分。
+              </p>
+            </div>
+          </article>
+
+          <!-- 7. 如何导出结果？ -->
+          <article class="faq-item">
+            <button class="faq-question">
+              <span>7. 如何导出结果？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                在审核空间左侧侧栏底部，有一个「导出结果 Export Results」按钮。
+                导出的内容主要是当前空间所有任务中已经标记为 Final 的图片：
+              </p>
+              <ul>
+                <li>系统会为每个 Task 创建一个文件夹；</li>
+                <li>只导出已选定 Final 的任务，未选 Final 的任务会跳过；</li>
+                <li>导出形式为 zip 压缩包，方便发给设计、法务或外部合作方。</li>
+              </ul>
+              <p>
+                后续版本中，我们可以在导出里附带一份简要的任务清单，
+                标出每张 Final 图片对应的 Task 名称和时间。
+              </p>
+            </div>
+          </article>
+
+          <!-- 8. 如何分享证据给外部？ -->
+          <article class="faq-item">
+            <button class="faq-question">
+              <span>8. 如何分享证据给外部？</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                每条 Evidence 都可以生成一个「在线预览页」链接，用于分享给外部同事或合作方。
+                在右侧 Evidence 列表里：
+              </p>
+              <ul>
+                <li>点击「查看详情」可以打开只读的 Evidence Preview 页面；</li>
+                <li>点击「复制预览链接」可以复制该页面的 URL，发给需要查看的人。</li>
+              </ul>
+              <p>
+                未登录用户可以直接查看这条 Evidence 的内容；
+                当他们点击页面底部的 CTA（例如「查看完整证据链」或「创建图片审核空间」）时，
+                系统会引导其先登录/注册。已登录并有权限的用户，可以从预览页跳回对应的 Space
+                和 Task，看到完整的证据链和讨论记录。
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer：入口之一 -->
+    <footer class="footer">
+      <a href="help.html">帮助中心</a>
+      <a href="#">隐私政策</a>
+      <a href="#">服务条款</a>
+      <a href="#">联系我们</a>
+    </footer>
+
+    <script src="help.js"></script>
+  </body>
+</html>
