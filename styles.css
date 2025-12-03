@@ -1,3 +1,132 @@
+/* ========== Help Center 布局 ========== */
+.help-layout {
+  max-width: 1120px;
+  margin: 32px auto 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+  gap: 24px;
+}
+
+.help-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.help-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+}
+
+.help-subtitle {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.help-highlight {
+  margin-top: 8px;
+  padding: 14px 14px 16px;
+  border-radius: 16px;
+  border: 1px solid #ececec;
+  background: #fafafa;
+}
+
+.help-highlight-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.help-highlight-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.help-faq {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 16px 18px;
+  border: 1px solid #ececec;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
+}
+
+.help-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* FAQ 列表 */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faq-item {
+  border-radius: 12px;
+  border: 1px solid #e3e3e3;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+/* 问题行（按钮） */
+.faq-question {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-question span:first-child {
+  font-weight: 500;
+  color: #222;
+}
+
+.faq-icon {
+  font-size: 16px;
+  color: #999;
+  transition: transform 0.2s ease;
+}
+
+/* 答案内容 */
+.faq-answer {
+  padding: 0 12px 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.7;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.22s ease-out, padding-bottom 0.22s ease-out;
+}
+
+.faq-answer p {
+  margin: 8px 0;
+}
+
+.faq-answer ul {
+  margin: 4px 0 8px 18px;
+}
+
+/* 展开的状态 */
+.faq-item.active .faq-answer {
+  padding-bottom: 10px;
+  max-height: 320px; /* 足够显示常规内容 */
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg); /* + 转成 × 的感觉 */
+}
 /* ========== Evidence Preview 布局 ========== */
 .preview-layout {
   max-width: 1120px;
