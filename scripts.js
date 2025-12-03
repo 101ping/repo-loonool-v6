@@ -1,13 +1,11 @@
-// 监听按钮点击事件
-document.getElementById('create-space-btn').addEventListener('click', function() {
-    // 假设当前用户未登录
-    let loggedIn = false;
+const createSpaceBtn = document.getElementById("createSpaceBtn");
 
-    if (loggedIn) {
-        // 如果已登录，跳转到审核空间页面
-        window.location.href = '/review-space'; // 假设这是审核空间页面的路径
-    } else {
-        // 如果未登录，跳转到登录页面
-        window.location.href = '/login'; // 登录页面路径
-    }
-});
+if (createSpaceBtn) {
+  createSpaceBtn.addEventListener("click", () => {
+    // 这里只负责视觉动效，实际“未登录跳转登录 / 已登录创建空间”
+    // 交给以后接后端时处理，这里不写逻辑。
+    createSpaceBtn.classList.remove("btn-pulse");
+    void createSpaceBtn.offsetWidth; // 强制重绘，保证动画每次都触发
+    createSpaceBtn.classList.add("btn-pulse");
+  });
+}
