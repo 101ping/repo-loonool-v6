@@ -2,11 +2,11 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <title>Login / Sign Up · LOONOOL 图片审核空间</title>
+    <title>登录 / 注册 · LOONOOL 图片审核空间</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- 顶部导航，与首页一致 -->
+    <!-- 顶部导航 -->
     <header class="navbar">
       <div class="nav-left">
         <div class="logo"></div>
@@ -15,57 +15,93 @@
 
       <nav class="nav-right">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="login.html" class="nav-link">Login</a>
-        <a href="login.html" class="nav-link">Sign Up</a>
+        <a href="my-spaces.html" class="nav-link">My Spaces</a>
+        <a href="login.html" class="nav-link nav-link-active">Login / Sign Up</a>
         <a href="help.html" class="nav-link">Help</a>
       </nav>
     </header>
 
-    <!-- 登录 / 注册主体 -->
-    <main class="page-center">
+    <!-- 主体 -->
+    <main class="auth-layout">
       <section class="auth-card">
-        <h1 class="auth-title">登录 LOONOOL</h1>
-        <p class="auth-subtitle">使用你的工作邮箱登录图片审核空间。</p>
-
-        <form class="auth-form">
-          <label class="auth-label">
-            Email
-            <input
-              type="email"
-              name="email"
-              class="auth-input"
-              placeholder="you@company.com"
-            />
-          </label>
-
-          <label class="auth-label">
-            Password
-            <input
-              type="password"
-              name="password"
-              class="auth-input"
-              placeholder="至少 8 位密码"
-            />
-          </label>
-
-          <!-- 错误提示区域预留（不实现真实逻辑） -->
-          <div id="authError" class="auth-error-placeholder">
-            <!-- 将来填入：邮箱或密码错误等提示 -->
-          </div>
-
-          <button type="submit" class="btn-primary auth-submit">
+        <!-- Tab 切换 -->
+        <div class="auth-tabs">
+          <button
+            class="auth-tab auth-tab-active"
+            data-mode="login"
+            id="loginTab"
+          >
             登录 Login
           </button>
-        </form>
+          <button class="auth-tab" data-mode="signup" id="signupTab">
+            注册 Sign Up
+          </button>
+        </div>
 
-        <p class="auth-footer-text">
-          还没有帐号？
-          <a href="login.html" class="auth-link">注册一个新帐号（Sign Up）</a>
+        <!-- 标题 -->
+        <h1 class="auth-title" id="authTitle">登录你的图片审核空间</h1>
+        <p class="auth-subtitle" id="authSubtitle">
+          输入邮箱和密码登录。如果你还没有账号，可以切换到「注册」创建新的空间。
         </p>
+
+        <!-- 表单 -->
+        <form class="auth-form" id="authForm" data-mode="login">
+          <label class="auth-label">
+            邮箱 Email
+            <input
+              type="email"
+              class="auth-input"
+              name="email"
+              required
+              placeholder="you@example.com"
+            />
+          </label>
+
+          <label class="auth-label">
+            密码 Password
+            <input
+              type="password"
+              class="auth-input"
+              name="password"
+              required
+              minlength="6"
+              placeholder="不少于 6 位密码"
+            />
+          </label>
+
+          <!-- 预留错误提示区域（V1 不做真实校验） -->
+          <div class="auth-error" id="authError" style="display: none">
+            这里预留用于展示登录/注册错误信息。（V1 暂不做真实校验）
+          </div>
+
+          <button type="submit" class="btn-primary btn-full" id="authSubmit">
+            登录
+          </button>
+
+          <p class="auth-switch-hint">
+            还没有账号？
+            <button type="button" class="link-button" id="goSignupInline">
+              去注册一个新的空间
+            </button>
+          </p>
+        </form>
+      </section>
+
+      <!-- 右侧介绍文案（可选） -->
+      <section class="auth-side-info">
+        <h2 class="auth-side-title">为什么需要登录？</h2>
+        <p class="auth-side-text">
+          登录后，你可以创建图片审核空间、邀请团队成员一起审核图片，并在一个地方管理所有任务和证据链。
+        </p>
+        <ul class="auth-side-list">
+          <li>保存你创建的所有 Space 和 Task；</li>
+          <li>查看完整的审核记录和 AI 分析结果；</li>
+          <li>导出 Final 图片和对应的 Evidence；</li>
+          <li>一键生成 Evidence 在线预览链接，分享给外部同事。</li>
+        </ul>
       </section>
     </main>
 
-    <!-- 公共页脚 -->
     <footer class="footer">
       <a href="help.html">帮助中心</a>
       <a href="#">隐私政策</a>
