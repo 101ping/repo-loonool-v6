@@ -3,6 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>我的空间 · LOONOOL 图片审核空间</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- 顶部导航栏（与首页保持一致） -->
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="logo"></div>
+        <span class="brand-text">LOONOOL · 图片审核空间</span>
+      </div>
+
+      <nav class="nav-right">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Login</a>
+        <a href="#" class="nav-link">Sign Up</a>
+        <a href="#" class="nav-link">Help</a>
+      </nav>
+    </header>
+
+    <!-- 页面主体 -->
+    <main class="page-container">
+      <!-- 顶部标题 -->
+      <section class="page-header">
+        <h1 class="page-title">我的空间 My Spaces</h1>
+        <p class="page-subtitle">
+          查看你参与的所有图片审核空间，从这里进入各自的 Review Space。
+        </p>
+      </section>
+
+      <!-- 空间列表 -->
+      <section class="spaces-section">
+        <div class="spaces-card">
+          <div class="spaces-card-header">
+            <span class="spaces-card-title">空间列表</span>
+            <button class="btn-secondary" id="createSpaceFromList">
+              创建新的审核空间
+            </button>
+          </div>
+
+          <div class="spaces-table">
+            <!-- 表头 -->
+            <div class="spaces-table-row spaces-table-header">
+              <div class="spaces-col-name">空间名称（Space Name）</div>
+              <div class="spaces-col-owner">创建者（Owner）</div>
+              <div class="spaces-col-tasks">任务数量（Task Count）</div>
+              <div class="spaces-col-updated">最近更新时间（Last Updated）</div>
+              <div class="spaces-col-status">状态（Status）</div>
+              <div class="spaces-col-action"></div>
+            </div>
+
+            <!-- 示例数据行 1 -->
+            <div
+              class="spaces-table-row spaces-table-body-row"
+              data-space-id="space-001"
+            >
+              <div class="spaces-col-name">
+                <button class="link-button space-link" data-space-id="space-001">
+                  新品包装设计审核 · 2025-Q1
+                </button>
+              </div>
+              <div class="spaces-col-owner">Li Mei</div>
+              <div class="spaces-col-tasks">8</div>
+              <div class="spaces-col-updated">2025-12-01 15:32</div>
+              <div class="spaces-col-status">
+                <span class="status-badge status-active">活跃</span>
+              </div>
+              <div class="spaces-col-action">
+                <button
+                  class="btn-ghost enter-space-btn"
+                  data-space-id="space-001"
+                >
+                  进入空间
+                </button>
+              </div>
+            </div>
+
+            <!-- 示例数据行 2 -->
+            <div
+              class="spaces-table-row spaces-table-body-row"
+              data-space-id="space-002"
+            >
+              <div class="spaces-col-name">
+                <button class="link-button space-link" data-space-id="space-002">
+                  品牌 Logo 相似度审核
+                </button>
+              </div>
+              <div class="spaces-col-owner">Wang Si</div>
+              <div class="spaces-col-tasks">3</div>
+              <div class="spaces-col-updated">2025-11-20 10:05</div>
+              <div class="spaces-col-status">
+                <span class="status-badge status-archived">已归档</span>
+              </div>
+              <div class="spaces-col-action">
+                <button
+                  class="btn-ghost enter-space-btn"
+                  data-space-id="space-002"
+                >
+                  进入空间
+                </button>
+              </div>
+            </div>
+
+            <!-- 示例数据行 3 -->
+            <div
+              class="spaces-table-row spaces-table-body-row"
+              data-space-id="space-003"
+            >
+              <div class="spaces-col-name">
+                <button class="link-button space-link" data-space-id="space-003">
+                  社交媒体活动视觉素材审核
+                </button>
+              </div>
+              <div class="spaces-col-owner">You</div>
+              <div class="spaces-col-tasks">15</div>
+              <div class="spaces-col-updated">2025-12-03 09:18</div>
+              <div class="spaces-col-status">
+                <span class="status-badge status-active">活跃</span>
+              </div>
+              <div class="spaces-col-action">
+                <button
+                  class="btn-ghost enter-space-btn"
+                  data-space-id="space-003"
+                >
+                  进入空间
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 未来可以在这里加分页 / 筛选 -->
+        </div>
+      </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+      <a href="#">帮助中心</a>
+      <a href="#">隐私政策</a>
+      <a href="#">服务条款</a>
+      <a href="#">联系我们</a>
+    </footer>
+
+    <script src="my-spaces.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LOONOOL · 图片审核空间</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
