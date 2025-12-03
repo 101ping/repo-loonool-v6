@@ -1,3 +1,22 @@
+const SPACES = [
+  {
+    name: "新品包装设计审核 · 2025-Q1",
+    owner: "Li Mei",
+    taskCount: 8,
+    lastUpdated: "2025-12-01 15:32"
+  },
+  {
+    name: "新品包装设计审核",
+    owner: "Li Mei",
+    taskCount: 4,
+    lastUpdated: "2025-12-01 16:20"  // 👈 时间更晚 → 自动排最前
+  }
+];
+
+// 按更新时间排序（最新的排最上）
+SPACES.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+
+// 然后再渲染列表 renderSpaces(SPACES)
 // 假数据，你可以保留或替换
 const spaces = [
   {
