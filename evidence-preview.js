@@ -1,3 +1,21 @@
+// ========== 404 自动跳转函数 ==========
+function goto404() {
+  window.location.href = "404.html"; 
+}
+
+// ========== 解析 URL 参数 ==========
+function getQueryParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+const spaceId = getQueryParam("spaceId");
+const taskId = getQueryParam("taskId");
+const evidenceId = getQueryParam("evidenceId");
+
+// 基础参数检查（任何一个缺失 → 404）
+if (!spaceId || !taskId || !evidenceId) {
+  goto404();
+}
 /***********************
  * 1. 读取 URL 参数
  ***********************/
