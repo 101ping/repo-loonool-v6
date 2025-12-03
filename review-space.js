@@ -1,3 +1,13 @@
+function getSpaceIdFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("spaceId"); // 比如 "space-001"
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const spaceId = getSpaceIdFromUrl();
+  console.log("当前 Space ID:", spaceId);
+  // TODO: 根据 spaceId 去请求后端数据
+});
 // ===== 假数据：任务 / 图片 / Evidence / 讨论 =====
 const tasks = [
   {
