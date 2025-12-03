@@ -1,3 +1,165 @@
+/* ========== 居中容器（登录 / 404 通用） ========== */
+.page-center {
+  min-height: calc(100vh - 160px);
+  /* 顶部导航 + 底部大概高度预留 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 60px;
+}
+
+/* ========== 登录 / 注册卡片 ========== */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px 26px 24px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eeeeee;
+}
+
+.auth-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+}
+
+.auth-subtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.auth-form {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-label {
+  font-size: 13px;
+  color: #444;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: 0.15s;
+}
+
+.auth-input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 1px #111;
+}
+
+.auth-error-placeholder {
+  min-height: 20px;
+  margin-top: -4px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: #c0392b;
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.auth-footer-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #666;
+}
+
+.auth-link {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ========== 帮助中心 FAQ ========== */
+.faq-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 8px;
+  padding: 20px 22px 26px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eeeeee;
+}
+
+.faq-item {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 16px;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.faq-question {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+.faq-answer {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ========== 404 错误卡片 ========== */
+.error-card {
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 34px 30px 28px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eeeeee;
+}
+
+.error-code {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #111;
+}
+
+.error-title {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.error-subtitle {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.error-actions {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 /* ========== 通用页面容器 ========== */
 .page-container {
   max-width: 1100px;
