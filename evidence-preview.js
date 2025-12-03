@@ -16,6 +16,47 @@ const evidenceId = getQueryParam("evidenceId");
 if (!spaceId || !taskId || !evidenceId) {
   goto404();
 }
+// ========== 404 自动跳转 ==========
+function goto404() {
+  window.location.href = "404.html";
+}
+
+// ========== URL 参数解析 ==========
+function getQueryParam(name) {
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+const spaceId = getQueryParam("spaceId");
+const taskId = getQueryParam("taskId");
+const evidenceId = getQueryParam("evidenceId");
+
+// 参数缺失 → 自动跳 404
+if (!spaceId || !taskId || !evidenceId) {
+  goto404();
+}
+
+// ========== 检查 mock 数据是否存在（把你问的代码放这里） ==========
+const space = MOCK_SPACES[spaceId];
+if (!space) {
+  goto404();
+}
+
+const task = space.tasks[taskId];
+if (!task) {
+  goto404();
+}
+
+const evidence = task.evidences[evidenceId];
+if (!evidence) {
+  goto404();
+}
+
+// ========== 数据存在 → 渲染 Evidence 页面 ==========
+document.getElementById("eviTitle").textContent = evidence.title;
+document.getElementById("eviCreator").textContent = evidence.creator;
+document.getElementById("eviTime").textContent = evidence.time;
+document.getElementById("eviContent").textContent = evidence.content;
+
 /***********************
  * 1. 读取 URL 参数
  ***********************/
