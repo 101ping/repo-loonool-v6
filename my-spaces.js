@@ -1,33 +1,21 @@
-const SPACES = [
-  {
-    name: "新品包装设计审核 · 2025-Q1",
-    owner: "Li Mei",
-    taskCount: 8,
-    lastUpdated: "2025-12-01 15:32"
-  },
-  {
-    name: "新品包装设计审核",
-    owner: "Li Mei",
-    taskCount: 4,
-    lastUpdated: "2025-12-01 16:20"  // 👈 时间更晚 → 自动排最前
-  }
-];
-
-// 按更新时间排序（最新的排最上）
-SPACES.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
-
-// 然后再渲染列表 renderSpaces(SPACES)
-// 假数据，你可以保留或替换
+// ================== 1. 假数据：Space 列表 ==================
 const spaces = [
   {
     id: "space-001",
+    name: "新品包装设计审核",              // 👈 你希望排在最上面的
+    owner: "Li Mei",
+    taskCount: 4,
+    lastUpdated: "2025-12-01 16:20",       // 时间最新 → 排第一
+  },
+  {
+    id: "space-002",
     name: "新品包装设计审核 · 2025-Q1",
     owner: "Li Mei",
     taskCount: 8,
     lastUpdated: "2025-12-01 15:32",
   },
   {
-    id: "space-002",
+    id: "space-003",
     name: "品牌 Logo 相似度审核",
     owner: "Wang Si",
     taskCount: 3,
@@ -35,11 +23,15 @@ const spaces = [
   },
 ];
 
+// ================== 2. 按更新时间排序（最新排最上） ==================
+spaces.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+
+// ================== 3. 渲染 Space 列表 ==================
 function renderSpaces() {
   const container = document.getElementById("spacesContainer");
   if (!container) return;
 
-  // 有空间 → 表格
+  // 有空间 → 渲染表格
   if (spaces.length > 0) {
     container.innerHTML = `
       <table class="spaces-table">
@@ -78,28 +70,41 @@ function renderSpaces() {
       </table>
     `;
   } else {
-    // 空状态略
+    // 空状态（当前先写一个简单提示，你以后可以替换成更漂亮的空状态）
+    container.innerHTML = `
+      <div class="spaces-empty">
+        你还没有任何图片审核空间。
+        <button id="createSpaceFromEmpty" class="btn-primary">
+          创建新的审核空间
+        </button>
+      </div>
+    `;
   }
 }
 
+// ================== 4. 绑定事件 ==================
 function bindMySpacesEvents() {
   // 顶部“创建新的审核空间”按钮
   const createBtn = document.getElementById("createSpaceFromList");
   if (createBtn) {
     createBtn.addEventListener("click", () => {
-      // 简单处理：先直接跳到 review-space 页面
+      // 现在先简单跳到 review-space 页面
       window.location.href = "review-space.html";
     });
   }
 
-  // 事件委托：点击 Space 名称 / 进入空间 → 打开 review-space 页面
+  // 若空状态里有一个按钮，也绑定一下
   document.addEventListener("click", (event) => {
     const target = event.target;
+
+    if (target.id === "createSpaceFromEmpty") {
+      window.location.href = "review-space.html";
+      return;
+    }
 
     // 点击 Space 名称
     if (target.classList.contains("space-link")) {
       const spaceId = target.getAttribute("data-space-id");
-      // 带参数跳转（以后后端可以用这个 spaceId）
       window.location.href = `review-space.html?spaceId=${spaceId}`;
     }
 
@@ -111,6 +116,7 @@ function bindMySpacesEvents() {
   });
 }
 
+// ================== 5. 页面加载完成后执行 ==================
 window.addEventListener("DOMContentLoaded", () => {
   renderSpaces();
   bindMySpacesEvents();
