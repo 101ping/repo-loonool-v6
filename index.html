@@ -6,6 +6,20 @@
     <title>LOONOOL · 图片审核空间</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
+<script>
+  // 页面加载完就给按钮加点击事件
+  window.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("createSpaceBtn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      // 统一跳到登录/注册页，登录成功后再回到 My Spaces
+      window.location.href = "login.html?next=my-spaces.html";
+    });
+  });
+</script>
+</body>
+</html>
 
   <body>
     <!-- ========== 顶部导航栏 ========== -->
