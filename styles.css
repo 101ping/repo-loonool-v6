@@ -1,3 +1,106 @@
+/* ========== Evidence Preview 布局 ========== */
+.preview-layout {
+  max-width: 1120px;
+  margin: 32px auto 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) 320px;
+  gap: 20px;
+}
+
+.preview-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.preview-header {
+  margin-bottom: 4px;
+}
+
+.preview-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+}
+
+.preview-meta {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* 主内容卡片 */
+.preview-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px 18px 20px;
+  border: 1px solid #ececec;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
+}
+
+.preview-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.preview-content {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.preview-content p {
+  margin-bottom: 8px;
+}
+
+/* 如果你需要展示“假图”，可以用这个样式 */
+.preview-content-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ddd, #f3f3f3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* 右侧 CTA 栏 */
+.preview-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-cta-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 14px 16px;
+  border: 1px solid #ececec;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+}
+
+.preview-cta-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.preview-cta-text {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.preview-cta-note {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888;
+}
 /* ========== 三列整体布局 ========== */
 .review-layout {
   display: grid;
