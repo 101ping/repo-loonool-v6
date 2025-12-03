@@ -104,4 +104,431 @@ const SPACE_CONFIGS = {
             who: "Wang Si",
             time: "2025-11-21 09:10",
             summary:
-              "截取了 4 个在同一大类下已注册的图形商标，用于后续比对
+              "截取了 4 个在同一大类下已注册的图形商标，用于后续比对。",
+          },
+        ],
+      },
+    ],
+    discussion: [
+      {
+        id: "m1",
+        type: "system",
+        text: "系统：已创建 Logo 相似度审核任务（任务 1）。",
+      },
+      {
+        id: "m2",
+        type: "user",
+        author: "You",
+        text: "这组 Logo 主要担心的是图形轮廓太接近已有商标。",
+      },
+    ],
+  },
+
+  "space-003": {
+    spaceName: "社交媒体活动视觉素材审核",
+    tasks: [], // 故意留空：演示首进来时为空状态
+    discussion: [
+      {
+        id: "m1",
+        type: "system",
+        text: "系统：该空间尚未上传任何图片，可以从左侧 Add Images 开始。",
+      },
+    ],
+  },
+};
+
+/***********************
+ * 3. 当前 Space 运行时状态
+ ***********************/
+const currentSpaceId = getSpaceIdFromUrl() || "space-001";
+const currentSpaceConfig =
+  SPACE_CONFIGS[currentSpaceId] || SPACE_CONFIGS["space-001"];
+
+// 这里把配置里的数据“拷一份”到运行时变量里，后面会改它
+let tasks = JSON.parse(JSON.stringify(currentSpaceConfig.tasks || []));
+let discussionMessages = JSON.parse(
+  JSON.stringify(currentSpaceConfig.discussion || [])
+);
+
+// 当前选中的任务 id（如果有任务就默认第一个）
+let currentTaskId = tasks[0]?.id || null;
+
+/***********************
+ * 4. 工具函数：取当前任务
+ ***********************/
+function getCurrentTask() {
+  if (!currentTaskId) return null;
+  return tasks.find((t) => t.id === currentTaskId) || null;
+}
+
+/***********************
+ * 5. 左侧：Task List
+ ***********************/
+function renderTaskList() {
+  const taskListEl = document.getElementById("taskList");
+  if (!taskListEl) return;
+
+  if (!tasks.length) {
+    taskListEl.innerHTML =
+      '<li class="task-item"><span class="task-meta">暂无任务，请先上传图片。</span></li>';
+    return;
+  }
+
+  taskListEl.innerHTML = tasks
+    .map((task, index) => {
+      const imgCount = task.images.length;
+      const active = task.id === currentTaskId ? "active" : "";
+      const finalHtml = task.hasFinal
+        ? '<span class="task-final-icon">✅</span>'
+        : '<span class="task-final-placeholder">Final</span>';
+
+      const label = task.name || `任务 ${index + 1}`;
+
+      return `
+        <li class="task-item ${active}" data-task-id="${task.id}">
+          <div class="task-item-left">
+            <div class="task-name">${label}</div>
+            <div class="task-meta">图片：${imgCount}/6</div>
+          </div>
+          ${finalHtml}
+        </li>
+      `;
+    })
+    .join("");
+}
+
+/***********************
+ * 6. 中间：Image Review
+ ***********************/
+function renderImages() {
+  const task = getCurrentTask();
+  const grid = document.getElementById("imageGrid");
+  const empty = document.getElementById("imageEmptyState");
+  const taskLabel = document.getElementById("currentTaskLabel");
+  if (!grid || !empty || !taskLabel) return;
+
+  if (!task) {
+    taskLabel.textContent = "当前：暂无任务";
+    empty.style.display = "block";
+    grid.style.display = "none";
+    return;
+  }
+
+  taskLabel.textContent = `当前：${task.name}`;
+
+  if (!task.images.length) {
+    empty.style.display = "block";
+    grid.style.display = "none";
+    return;
+  }
+
+  empty.style.display = "none";
+  grid.style.display = "block";
+
+  const count = task.images.length;
+  grid.className = "image-grid " + (count === 1 ? "single" : "multi");
+
+  grid.innerHTML = task.images
+    .map(
+      (img) => `
+      <div class="image-card" data-img-id="${img.id}">
+        <div class="image-thumb" data-img-id="${img.id}">
+          <span>预览：${img.name}</span>
+          <div class="image-thumb-overlay">
+            设为 Final（预留按钮）
+          </div>
+        </div>
+        <div class="image-meta-row">
+          <div class="image-name">${img.name}</div>
+          ${
+            img.isFinal
+              ? `<div class="image-final-tag">Final ✅</div>`
+              : `<div style="font-size:11px;color:#aaa;">候选</div>`
+          }
+        </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
+/***********************
+ * 7. 中间：Discussion
+ ***********************/
+function renderDiscussion() {
+  const box = document.getElementById("discussionMessages");
+  if (!box) return;
+
+  box.innerHTML = discussionMessages
+    .map((m) => {
+      if (m.type === "system") {
+        return `<div class="msg-system">${m.text}</div>`;
+      }
+      return `
+        <div class="msg-user">
+          <div class="msg-user-author">${m.author}</div>
+          <div class="msg-user-text">${m.text}</div>
+        </div>
+      `;
+    })
+    .join("");
+
+  box.scrollTop = box.scrollHeight;
+}
+
+/***********************
+ * 8. 右侧：Evidence Summary + List
+ ***********************/
+function renderEvidenceSummary() {
+  const task = getCurrentTask();
+  const el = document.getElementById("evidenceSummary");
+  if (!el) return;
+
+  if (!task) {
+    el.innerHTML = `
+      <div class="summary-row">
+        <span class="summary-label">当前空间</span>
+        <span class="summary-value">${currentSpaceConfig.spaceName}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">状态</span>
+        <span class="summary-value summary-pill">尚未创建任务</span>
+      </div>
+    `;
+    return;
+  }
+
+  const imgCount = task.images.length;
+  const evCount = task.evidences.length;
+  const finalImg = task.images.find((i) => i.isFinal);
+
+  el.innerHTML = `
+    <div class="summary-row">
+      <span class="summary-label">当前空间</span>
+      <span class="summary-value">${currentSpaceConfig.spaceName}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">任务名称</span>
+      <span class="summary-value">${task.name}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">图片数量</span>
+      <span class="summary-value">${imgCount}/6</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">已生成证据</span>
+      <span class="summary-value">${evCount} 条</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Final 图片</span>
+      <span class="summary-value">
+        ${
+          finalImg
+            ? `已选定：${finalImg.name}`
+            : `<span style="color:#c0392b;">尚未选定</span>`
+        }
+      </span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">AI 综合建议</span>
+      <span class="summary-value summary-pill">
+        ${
+          finalImg
+            ? "当前 Final 方向整体风险可控，可继续完善细节。"
+            : "建议先完成相似度与风格检查，再讨论最终方案。"
+        }
+      </span>
+    </div>
+  `;
+}
+
+function renderEvidenceList() {
+  const task = getCurrentTask();
+  const listEl = document.getElementById("evidenceList");
+  if (!listEl) return;
+
+  if (!task || !task.evidences.length) {
+    listEl.innerHTML =
+      '<div class="sidebar-hint">当前任务还没有任何 Evidence，可以从下方工具或上传入口创建。</div>';
+    return;
+  }
+
+  listEl.innerHTML = task.evidences
+    .map(
+      (ev) => `
+      <div class="evidence-item">
+        <div class="evidence-row-top">
+          <div class="evidence-title">${ev.title}</div>
+          <div class="evidence-type-pill">${ev.type}</div>
+        </div>
+        <div class="evidence-meta">
+          ${ev.who} · ${ev.time}
+        </div>
+        <div class="evidence-summary">
+          ${ev.summary}
+        </div>
+        <div class="evidence-actions">
+          <button class="btn-secondary btn-small">查看详情</button>
+          <button class="btn-secondary btn-small">复制预览链接</button>
+        </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
+/***********************
+ * 9. 图片预览 Modal（假图）
+ ***********************/
+function openImageModal(img) {
+  const modal = document.getElementById("imageModal");
+  const body = document.getElementById("imageModalBody");
+  if (!modal || !body) return;
+
+  body.innerHTML = `
+    <div class="image-modal-thumb">
+      假图预览：${img.name}
+    </div>
+    <div class="image-modal-name">${img.name}</div>
+    <p style="font-size:12px;color:#777;margin-top:4px;">
+      这里将来接真实大图预览（全屏 / 放大）。
+    </p>
+  `;
+
+  modal.style.display = "flex";
+}
+
+function closeImageModal() {
+  const modal = document.getElementById("imageModal");
+  if (!modal) return;
+  modal.style.display = "none";
+}
+
+/***********************
+ * 10. 事件绑定
+ ***********************/
+function bindEvents() {
+  // 左侧：Add Images
+  const addBtn = document.getElementById("addImagesBtn");
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      alert("这里将来接：系统打开文件选择窗口，支持多张图片。");
+    });
+  }
+
+  // 左侧：Export Results
+  const exportBtn = document.getElementById("exportBtn");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", () => {
+      alert(
+        "这里将来接：导出当前空间所有任务的 Final 图片为 zip 包（按 Task 分文件夹）。"
+      );
+    });
+  }
+
+  // 左侧：切换任务
+  const taskListEl = document.getElementById("taskList");
+  if (taskListEl) {
+    taskListEl.addEventListener("click", (e) => {
+      const item = e.target.closest(".task-item");
+      if (!item) return;
+      const id = item.getAttribute("data-task-id");
+      if (!id || id === currentTaskId) return;
+      currentTaskId = id;
+      renderTaskList();
+      renderImages();
+      renderEvidenceSummary();
+      renderEvidenceList();
+    });
+  }
+
+  // 中间：点击图片 → 弹出 Modal
+  const imageGrid = document.getElementById("imageGrid");
+  if (imageGrid) {
+    imageGrid.addEventListener("click", (e) => {
+      const thumb = e.target.closest(".image-thumb");
+      if (!thumb) return;
+      const imgId = thumb.getAttribute("data-img-id");
+      if (!imgId) return;
+
+      const task = getCurrentTask();
+      const img = task?.images.find((i) => i.id === imgId);
+      if (!img) return;
+
+      openImageModal(img);
+    });
+  }
+
+  // Modal 关闭
+  const modal = document.getElementById("imageModal");
+  const modalClose = document.getElementById("imageModalClose");
+  if (modal && modalClose) {
+    modalClose.addEventListener("click", closeImageModal);
+    modal.addEventListener("click", (e) => {
+      if (
+        e.target === modal ||
+        e.target.classList.contains("image-modal-backdrop")
+      ) {
+        closeImageModal();
+      }
+    });
+  }
+
+  // Discussion：发送消息
+  const form = document.getElementById("discussionForm");
+  const input = document.getElementById("discussionInput");
+  if (form && input) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      discussionMessages.push({
+        id: "user-" + Date.now(),
+        type: "user",
+        author: "You",
+        text,
+      });
+      input.value = "";
+      renderDiscussion();
+    });
+  }
+
+  // 邀请成员
+  const inviteBtn = document.getElementById("inviteBtn");
+  if (inviteBtn) {
+    inviteBtn.addEventListener("click", () => {
+      alert(
+        `这里将来接：为 Space 「${currentSpaceConfig.spaceName}」生成邀请链接。`
+      );
+    });
+  }
+
+  // 分析工具点击
+  document.addEventListener("click", (e) => {
+    const row = e.target.closest(".tool-row");
+    if (!row) return;
+    const nameEl = row.querySelector(".tool-name");
+    const label = nameEl ? nameEl.textContent.trim() : "分析工具";
+    alert(
+      `这里将来接：执行分析工具「${label}」，针对当前 Task 图片生成结果，并可保存为 Evidence。`
+    );
+  });
+}
+
+/***********************
+ * 11. 初始化
+ ***********************/
+window.addEventListener("DOMContentLoaded", () => {
+  // 顺便把浏览器 tab 标题改成带 Space 名称的
+  if (currentSpaceConfig.spaceName) {
+    document.title =
+      currentSpaceConfig.spaceName + " · 审核空间 · LOONOOL 图片审核空间";
+  }
+
+  renderTaskList();
+  renderImages();
+  renderDiscussion();
+  renderEvidenceSummary();
+  renderEvidenceList();
+  bindEvents();
+});
