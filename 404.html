@@ -1,40 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <title>页面不存在 · LOONOOL</title>
+    <title>页面不存在 · LOONOOL 图片审核空间</title>
     <link rel="stylesheet" href="styles.css" />
-
-    <style>
-      .error-page {
-        max-width: 420px;
-        margin: 120px auto 40px;
-        text-align: center;
-        padding: 20px;
-      }
-
-      .error-title {
-        font-size: 28px;
-        font-weight: 700;
-        margin-bottom: 12px;
-      }
-
-      .error-subtext {
-        font-size: 14px;
-        color: #555;
-        margin-bottom: 30px;
-      }
-
-      .error-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-    </style>
   </head>
-
   <body>
-    <!-- 顶部导航（可选，也能保持品牌一致性） -->
+    <!-- 顶部导航（可选，也可以省略） -->
     <header class="navbar">
       <div class="nav-left">
         <div class="logo"></div>
@@ -43,24 +16,25 @@
 
       <nav class="nav-right">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="my-spaces.html" class="nav-link">My Spaces</a>
         <a href="login.html" class="nav-link">Login</a>
+        <a href="login.html" class="nav-link">Sign Up</a>
         <a href="help.html" class="nav-link">Help</a>
       </nav>
     </header>
 
-    <!-- 主体 -->
-    <main class="error-page">
-      <h1 class="error-title">页面不存在</h1>
-      <p class="error-subtext">链接可能已失效，或该页面已被删除。</p>
+    <main class="page-center">
+      <section class="error-card">
+        <div class="error-code">404</div>
+        <h1 class="error-title">页面不存在 / 链接已失效</h1>
+        <p class="error-subtitle">
+          你访问的链接暂时不可用，或者已被移动。可以尝试回到首页，或进入你的图片审核空间。
+        </p>
 
-      <div class="error-actions">
-        <a href="index.html" class="btn-primary">返回首页（Back to Home）</a>
-
-        <button id="goMySpacesBtn" class="btn-secondary" style="display: none">
-          进入我的空间（My Spaces）
-        </button>
-      </div>
+        <div class="error-actions">
+          <button id="goHomeBtn" class="btn-secondary">返回首页</button>
+          <button id="goSpacesBtn" class="btn-primary">进入我的空间</button>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -70,21 +44,6 @@
       <a href="#">联系我们</a>
     </footer>
 
-    <script>
-      // 检查用户是否已登录
-      const loggedIn =
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem("loonoolIsLoggedIn") === "true";
-
-      const mySpacesBtn = document.getElementById("goMySpacesBtn");
-
-      // 若已登录 → 展示“进入我的空间”
-      if (loggedIn) {
-        mySpacesBtn.style.display = "block";
-        mySpacesBtn.addEventListener("click", () => {
-          window.location.href = "my-spaces.html";
-        });
-      }
-    </script>
+    <script src="error.js"></script>
   </body>
 </html>
